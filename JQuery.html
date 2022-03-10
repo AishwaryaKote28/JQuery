@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.comp{
+display: none;
+}
+
+/*.c{
+position: absolute;;
+text-align: center;
+left: 50%;
+}*/
+</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GET Assignment</title>
+<!-- CSS only -->
+
+<!-- <script type="text/javascript" src="GetAssignment.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div id="lbl1" class="container">
+ 
+</div>
+<div id="c" style="position: absolute; left: 30%; border: solid;">
+
+</div>
+</body>
+<script type="text/javascript">
+$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+})
+function showcompany(id){
+
+ let text = document.getElementById(id).innerHTML;
+ document.getElementById('c').innerHTML=text;
+// body...
+}
+function showaddress(id){
+
+ let tex1t = document.getElementById(id).innerHTML;
+ document.getElementById('c').innerHTML=tex1t;
+// body...
+}
+let count =0;
+$(document).ready(function() {
+$.get("https://jsonplaceholder.typicode.com/users",function(data){
+data.forEach(element =>{
+$("#lbl1").append('<div class="row">'+
+    '<div class="col-sm">'+
+     '<label id="l">'+element.name+'</label>'+
+    '</div>'+
+    '<div class="col-sm">'+
+      '<button id="btn1" class="btn-success btn-md"onclick="showcompany(\'c'+count+'\')">Company</button>'+
+      '<p class="comp" id="c'+count+'">'+'Name:'+element.company.name+'<br> catchPharse:'+element.company.catchPhrase+' <br>bs:'+element.company.bs+'<p>'+
+    '</div>'+
+    '<div class="col-sm">'+
+      '<button id="btn1" class="btn-success btn-md" onclick="showaddress(\'a'+count+'\')">Address</button>'+
+      '<p class="comp" id="a'+count+'">'+'Name:'+element.address.street+'<br> Suite:'+element.address.suite+' <br>City'+element.address.city+'<br>ZipCode:'+element.address.zipcode+'<p>'+
+
+    '</div>'+
+   '</div><br>');
+       count++;
+
+});
+
+
+$("#btn1").click(function(){
+
+/*$.each(data,function(index,item){
+$("#lbl1").append(item.name);
+})*/
+
+})
+})
+})
+</script>
+</html>
